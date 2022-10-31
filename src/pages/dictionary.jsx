@@ -9,8 +9,6 @@ import { GlobalContext } from "../context/GlobalContext";
 const Dictionary = () => {
   const [searchType, setSearchType] = useState("dictionary");
 
-  const { wordMeaning, wordThesaurus } = useContext(GlobalContext);
-
   return (
     <DictionaryWrapper>
       <Searchbar />

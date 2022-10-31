@@ -4,12 +4,19 @@ import { BiSearch } from "react-icons/bi";
 import { HiOutlineMicrophone } from "react-icons/hi";
 import { GlobalContext } from "../context/GlobalContext";
 import { message } from "antd";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Searchbar = () => {
   const { word, setWord, findWordThesaurus, findWordMeaning } =
     useContext(GlobalContext);
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const handleSearch = () => {
+    if (location.pathname == "/") {
+      navigate("/dictionary");
+    }
     if (!word.length || !word) {
       message.error("Invalid word! Try again.");
     } else {
@@ -54,7 +61,7 @@ const SearchWrapper = styled.div`
 `;
 
 const InputWrapper = styled.input`
-  width: 95%;
+  width: 80%;
   height: 100%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -67,12 +74,8 @@ const InputWrapper = styled.input`
 `;
 
 const MicWrapper = styled.div`
-  width: 5%;
+  width: 10%;
   height: 100%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-right: 20px;
-  padding-left: 10px;
   background: rgba(255, 255, 255, 0.2);
   border-right: 1px solid rgba(0, 0, 0, 0.1);
   transition: all ease-in-out 0.3s;
@@ -87,12 +90,8 @@ const MicWrapper = styled.div`
 `;
 
 const SearchButtonWrapper = styled.div`
-  width: 5%;
+  width: 10%;
   height: 100%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-right: 20px;
-  padding-left: 10px;
   background: rgba(255, 255, 255, 0.2);
   border-left: 1px solid rgba(0, 0, 0, 0.1);
   transition: all ease-in-out 0.3s;

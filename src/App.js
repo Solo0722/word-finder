@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import GlobalProvider from "./context/GlobalContext";
 import MainNav from "./components/MainNav";
 import Dictionary from "./pages/dictionary";
-import Games from "./pages/games";
 import Home from "./pages/home";
 import styled from "styled-components";
 import Footer from "./components/Footer";
@@ -15,9 +14,8 @@ function App() {
         <MainNav />
         <RoutesWrapper>
           <Routes>
-            <Route path="/dictionary" element={<Dictionary />} />
             <Route path="/*" element={<Home />} />
-            <Route path="/games" element={<Games />} />
+            <Route path="/dictionary" element={<Dictionary />} />
           </Routes>
         </RoutesWrapper>
         <Footer />

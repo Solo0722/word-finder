@@ -3,6 +3,7 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { navLinks } from "../utils/data";
+import { BiMenu } from "react-icons/bi";
 
 const MainNav = () => {
   return (
@@ -10,13 +11,6 @@ const MainNav = () => {
       <Link to="/">
         <img src="/dictionary.png" alt="logo" widt={30} height={30} />
       </Link>
-      <ul>
-        {navLinks.map((lk, i) => (
-          <NavLink to={lk.link} key={i}>
-            <li>{lk.name}</li>
-          </NavLink>
-        ))}
-      </ul>
     </NavWrapper>
   );
 };

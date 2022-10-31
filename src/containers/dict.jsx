@@ -20,23 +20,24 @@ const Collegiate = () => {
       subdirectory = audioId[0];
     }
 
-    let audioURL = `https://media.merriam-webster.com/audio/prons/en/us/mp3/${subdirectory}/${audioId}.mp3,`;
+    let audioURL = `https://media.merriam-webster.com/audio/prons/en/us/mp3/${subdirectory}/${audioId}.mp3`;
+
     new Audio(audioURL).play();
   };
 
   return (
     <>
-      {!wordMeaning || !wordMeaning.length ? (
-        <div>
+      {!wordMeaning || !wordMeaning?.length ? (
+        <CollegiateWrapper>
           <p>No results!</p>
           <p>Search word to find it's meaning.</p>
-        </div>
+        </CollegiateWrapper>
       ) : (
         <div
           style={{ display: "flex", flexDirection: "column", width: "100%" }}
         >
           {wordMeaning &&
-            wordMeaning?.map((group) => (
+            wordMeaning.map((group) => (
               <CollegiateWrapper>
                 <PrimaryWrapper>
                   <div style={{ display: "flex", flexDirection: "row" }}>
