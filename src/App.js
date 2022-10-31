@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.less";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import GlobalProvider from "./context/GlobalContext";
+import MainNav from "./components/MainNav";
+import Dictionary from "./pages/dictionary";
+import Games from "./pages/games";
+import Home from "./pages/home";
+import styled from "styled-components";
+import Footer from "./components/Footer";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <GlobalProvider>
+        <MainNav />
+        <RoutesWrapper>
+          <Routes>
+            <Route path="/dictionary" element={<Dictionary />} />
+            <Route path="/*" element={<Home />} />
+            <Route path="/games" element={<Games />} />
+          </Routes>
+        </RoutesWrapper>
+        <Footer />
+      </GlobalProvider>
+    </Router>
   );
 }
+
+const RoutesWrapper = styled.div`
+  width: 100%;
+  min-height: calc(100vh - 60px);
+
+  padding: 2rem 5rem;
+
+  @media screen and (max-width: 768px) {
+    & {
+      padding: 2rem;
+    }
+  }
+`;
 
 export default App;

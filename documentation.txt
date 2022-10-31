@@ -1,0 +1,5 @@
+Color scheme
+#e1f2f7, #1a2238,
+
+Font
+Muli
