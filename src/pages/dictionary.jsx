@@ -16,7 +16,7 @@ const Dictionary = () => {
         <TitleWrapper>
           <Button.Group style={{ width: "100%" }}>
             <Button
-              type={`${searchType == "dictionary" ? "primary" : "default"}`}
+              type={`${searchType === "dictionary" ? "primary" : "default"}`}
               onClick={() => setSearchType("dictionary")}
             >
               Dictionary

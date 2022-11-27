@@ -16,9 +16,7 @@ const GlobalProvider = ({ children }) => {
         `${BASE_URL}/collegiate/json/${word}?key=${process.env.REACT_APP_MERRIAM_APP_KEY_DICT}`
       );
       setWordMeaning(data);
-      console.log(data);
     } catch (error) {
-      console.log(error);
       setWordMeaning(null);
     }
   };
@@ -29,9 +27,7 @@ const GlobalProvider = ({ children }) => {
         `${BASE_URL}/thesaurus/json/${word}?key=${process.env.REACT_APP_MERRIAM_APP_KEY_THES}`
       );
       setWordThesaurus(data);
-      console.log(data);
     } catch (error) {
-      console.log(error);
       setWordThesaurus(null);
     }
   };

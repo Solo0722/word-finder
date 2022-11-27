@@ -1,23 +1,57 @@
-import React from "react";
+import React, { useState } from "react";
 import moment from "moment";
-import { FcSpeaker } from "react-icons/fc";
-import { Button } from "antd";
 import styled from "styled-components";
+import axios from "axios";
+import { useEffect } from "react";
 
 const WordOfTheDay = () => {
+  const [wordOfTheDay, setWordOfTheDay] = useState(null);
+  const getWordOfTheDay = async () => {
+    await axios
+      .get(
+        `https://api.wordnik.com/v4/words.json/wordOfTheDay?api_key=${process.env.REACT_APP_WORDNIK_APP_KEY}`
+      )
+      .then(({ data }) => {
+        console.log(data);
+        setWordOfTheDay(data);
+      })
+      .catch((err) => console.error(err));
+  };
+
+  useEffect(() => {
+    getWordOfTheDay();
+  }, []);
+
   return (
     <WordWrapper>
       <TitleWrapper>
         <h1>Word of the Day</h1>
         <p>{moment().format("dddd, Do MMMM YYYY")}</p>
+        <h2 style={{ fontStyle: "italic" }}>
+          "<span>{wordOfTheDay?.word}</span>"
+        </h2>
+        <p>{wordOfTheDay?.note}</p>
       </TitleWrapper>
       <BodyWrapper>
-        <h2>
-          "<span>remarkable</span>"
-        </h2>
-        <p>adjective</p>
-        <Button icon={<FcSpeaker />} type="default" ghost />
-        <a href="">Get the definitions, examples,synomyms and antonyms </a>
+        <h3>Definitions</h3>
+        <ol>
+          {wordOfTheDay?.definitions?.map((def, i) => (
+            <li key={i}>
+              <p>
+                {def.partOfSpeech} - {def.text}
+              </p>
+            </li>
+          ))}
+        </ol>
+        <br />
+        <h3>Examples</h3>
+        <ol>
+          {wordOfTheDay?.examples?.map((eg, i) => (
+            <li key={i}>
+              <p>{eg.text}</p>
+            </li>
+          ))}
+        </ol>
       </BodyWrapper>
     </WordWrapper>
   );
@@ -25,7 +59,6 @@ const WordOfTheDay = () => {
 
 const WordWrapper = styled.div`
   width: 100%;
-  height: 400px;
   min-height: 400px;
   background: rgba(255, 255, 255, 0.2);
   box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 5px -1px,
@@ -36,7 +69,6 @@ const WordWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   background-image: linear-gradient(
       to bottom,
       rgba(0, 0, 0, 0.5) 20%,
@@ -50,18 +82,14 @@ const WordWrapper = styled.div`
   position: relative;
 
   h1 {
-    border-bottom: 3px solid #1a2238;
     color: lavender;
+    text-align: center;
   }
 
   h2 {
     font-size: 25px;
     color: Lavender;
     font-weight: bolder;
-  }
-
-  p {
-    font-style: italic;
   }
 
   button {
@@ -75,17 +103,24 @@ const WordWrapper = styled.div`
 `;
 
 const TitleWrapper = styled.div`
-  position: absolute;
-  top: 10px;
-`;
-
-const BodyWrapper = styled.div`
-  margin-top: 70px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+
+const BodyWrapper = styled.div`
+  width: 100%;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   justify-content: center;
-  text-align: center;
+
+  h3 {
+    color: lavender;
+    font-weight: bold;
+  }
 `;
 
 export default WordOfTheDay;

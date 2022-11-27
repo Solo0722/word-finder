@@ -1,10 +1,14 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { BiSearch } from "react-icons/bi";
 import { HiOutlineMicrophone } from "react-icons/hi";
 import { GlobalContext } from "../context/GlobalContext";
-import { message } from "antd";
+import { message, Tooltip } from "antd";
 import { useLocation, useNavigate } from "react-router-dom";
+import { createSpeechlySpeechRecognition } from "@speechly/speech-recognition-polyfill";
+import SpeechRecognition, {
+  useSpeechRecognition,
+} from "react-speech-recognition";
 
 const Searchbar = () => {
   const { word, setWord, findWordThesaurus, findWordMeaning } =
@@ -12,6 +16,24 @@ const Searchbar = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
+
+  //speech recognition function
+
+  const {
+    transcript,
+    listening,
+    resetTranscript,
+    browserSupportsSpeechRecognition,
+  } = useSpeechRecognition();
+
+  const startListening = () =>
+    SpeechRecognition.startListening({ continuous: false });
+
+  if (!browserSupportsSpeechRecognition) {
+    message.error("Browser doesn't support speech recognition!");
+  }
+
+  if (listening) setWord(transcript);
 
   const handleSearch = () => {
     if (location.pathname == "/") {
@@ -22,14 +44,17 @@ const Searchbar = () => {
     } else {
       findWordThesaurus(word);
       findWordMeaning(word);
+      resetTranscript();
     }
   };
 
   return (
     <SearchWrapper>
-      <MicWrapper>
-        <HiOutlineMicrophone />
-      </MicWrapper>
+      <Tooltip title="Press and start speaking">
+        <MicWrapper onClick={startListening}>
+          <HiOutlineMicrophone />
+        </MicWrapper>
+      </Tooltip>
       <InputWrapper
         type="text"
         placeholder="Search..."

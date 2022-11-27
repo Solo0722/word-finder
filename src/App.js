@@ -6,6 +6,7 @@ import Dictionary from "./pages/dictionary";
 import Home from "./pages/home";
 import styled from "styled-components";
 import Footer from "./components/Footer";
+import PageNotFound from "./pages/404";
 
 function App() {
   return (
@@ -14,8 +15,9 @@ function App() {
         <MainNav />
         <RoutesWrapper>
           <Routes>
-            <Route path="/*" element={<Home />} />
+            <Route path="/" element={<Home />} />
             <Route path="/dictionary" element={<Dictionary />} />
+            <Route path="*" element={<PageNotFound />} />
           </Routes>
         </RoutesWrapper>
         <Footer />
