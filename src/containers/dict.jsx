@@ -1,4 +1,4 @@
-import { Button, Divider } from "antd";
+import { Button } from "antd";
 import React, { useContext } from "react";
 import styled from "styled-components";
 import { GlobalContext } from "../context/GlobalContext";
@@ -10,9 +10,9 @@ const Collegiate = () => {
   const playPronunciation = (group) => {
     let audioId = group?.hwi?.prs && group?.hwi?.prs[0].sound.audio;
     let subdirectory;
-    if (audioId?.slice(0, 3) == "bix") {
+    if (audioId?.slice(0, 3) === "bix") {
       subdirectory = "bix";
-    } else if (audioId?.slice(0, 2) == "gg") {
+    } else if (audioId?.slice(0, 2) === "gg") {
       subdirectory = "gg";
     } else if (typeof audioId[0] == "number") {
       subdirectory = "number";

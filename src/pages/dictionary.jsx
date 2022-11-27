@@ -1,10 +1,9 @@
 import { Button } from "antd";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Searchbar from "../components/Searchbar";
 import Collegiate from "../containers/dict";
 import Thesaurus from "../containers/thesaurus";
-import { GlobalContext } from "../context/GlobalContext";
 
 const Dictionary = () => {
   const [searchType, setSearchType] = useState("dictionary");
@@ -22,7 +21,7 @@ const Dictionary = () => {
               Dictionary
             </Button>
             <Button
-              type={`${searchType == "thesaurus" ? "primary" : "default"}`}
+              type={`${searchType === "thesaurus" ? "primary" : "default"}`}
               onClick={() => setSearchType("thesaurus")}
             >
               Thesaurus
@@ -30,7 +29,7 @@ const Dictionary = () => {
           </Button.Group>
         </TitleWrapper>
         <BodyWrapper>
-          {searchType == "dictionary" ? <Collegiate /> : <Thesaurus />}
+          {searchType === "dictionary" ? <Collegiate /> : <Thesaurus />}
         </BodyWrapper>
       </Wrapper>
     </DictionaryWrapper>

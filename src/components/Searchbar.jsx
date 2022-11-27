@@ -1,11 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { BiSearch } from "react-icons/bi";
 import { HiOutlineMicrophone } from "react-icons/hi";
 import { GlobalContext } from "../context/GlobalContext";
 import { message, Tooltip } from "antd";
 import { useLocation, useNavigate } from "react-router-dom";
-import { createSpeechlySpeechRecognition } from "@speechly/speech-recognition-polyfill";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
@@ -36,7 +35,7 @@ const Searchbar = () => {
   if (listening) setWord(transcript);
 
   const handleSearch = () => {
-    if (location.pathname == "/") {
+    if (location.pathname === "/") {
       navigate("/dictionary");
     }
     if (!word.length || !word) {
