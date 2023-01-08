@@ -20,7 +20,7 @@ const Footer = () => {
       </LinksWrapper>
       <cite>Developed and designed by OAS © 2022</cite>
       <Link to="/">
-        <img src="/dictionary.png" alt="logo" widt={30} height={30} />
+        <img src="/dictionary.png" alt="logo" width={30} height={30} />
       </Link>
     </FooterWrapper>
   );
